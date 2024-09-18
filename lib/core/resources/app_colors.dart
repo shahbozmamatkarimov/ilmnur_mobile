@@ -11,10 +11,14 @@ class AppColors {
   static const Color transparent = Colors.transparent;
 
   static const Color inputColor = Color(0xFFFFFFFF);
-  static const Color backgroundColor = Color(0xFFF6F6F6);
+  static const Color backgroundColor = Color(0xFFF0F5FA);
   static const Color mainColor = Color(0xFFFF852E);
   static const Color c_24 = Color(0xFF242424);
   static const Color c_66 = Color(0xFF666666);
+  static const Color c_f2 = Color(0xFFF2F2F2);
+  static const Color c_1b = Color(0xFF1B1B1B);
+  static const Color c_a1 = Color(0xFFA1A1A1);
+  static const Color c_7a = Color(0xFF7A7F88);
 
   static const Color c_07 = Color(0xFF070707);
 

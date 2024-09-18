@@ -2,7 +2,7 @@ name: ilmnur_mobile
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -35,7 +35,6 @@ dependencies:
   #UI
   flutter_svg: ^2.0.7
 
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -47,13 +46,16 @@ dev_dependencies:
   easy_localization: ^3.0.2
   auto_route_generator: ^7.3.1
   build_runner: ^2.4.6
+  flutter_launcher_icons: ^0.10.0
 
 flutter:
   uses-material-design: true
 
   assets:
+    - assets/svg/
     - assets/svg/nav/
     - assets/svg/lesson/
+    - assets/svg/bottomnav/
 
   # fonts:
   #   - family: Schyler
@@ -66,3 +68,7 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/svg/logo/logo.svg"
