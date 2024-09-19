@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+import 'package:ilmnur_mobile/core/data/side_menu_data.dart';
+import 'package:ilmnur_mobile/core/resources/app_colors.dart';
+
+class SideMenuWidget extends StatefulWidget {
+  const SideMenuWidget({super.key});
+
+  @override
+  State<SideMenuWidget> createState() => _SideMenuWidgetState();
+}
+
+class _SideMenuWidgetState extends State<SideMenuWidget> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final data = SideMenuData();
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        color: AppColors.white,
+      ),
+      child: ListView.builder(
+        itemCount: data.menu.length,
+        itemBuilder: (context, index) => buildMenuEntry(data, index),
+      ),
+    );
+  }
+
+  Widget buildMenuEntry(SideMenuData data, int index) {
+    final isSelected = selectedIndex == index;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(6.0),
+        ),
+        color: isSelected ? AppColors.mainColor : Colors.transparent,
+      ),
+      child: InkWell(
+        onTap: () => setState(() {
+          selectedIndex = index;
+        }),
+        child: Row(
+          children: [
+            SizedBox(
+              child: Icon(
+                data.menu[index].icon,
+                color: isSelected ? AppColors.white : AppColors.c_55,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              data.menu[index].title,
+              style: TextStyle(
+                fontSize: 16,
+                color: isSelected ? AppColors.white : AppColors.c_55,
+                fontWeight: FontWeight.normal,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

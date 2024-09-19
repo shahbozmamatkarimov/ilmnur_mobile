@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ilmnur_mobile/core/resources/app_colors.dart';
 import 'package:ilmnur_mobile/core/widgets/w_button.dart';
+import 'package:ilmnur_mobile/features/group/presentation/pages/course.dart';
 
 class Lessons extends StatelessWidget {
   const Lessons({super.key});
@@ -10,154 +11,266 @@ class Lessons extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: const EdgeInsets.only(top: 16),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        color: AppColors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Assalomu alaykum, Asaloy",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              "Bugun nimani o‘rganmoqchisiz?",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.c_66),
-            ),
-            const SizedBox(height: 24),
-            const Text(
-              "Darsliklar",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 20),
-            for (int _ in [1, 2, 3, 4, 5, 6])
-              Container(
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.only(bottom: 20),
-                // height: 168,
-                decoration: BoxDecoration(
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.04),
-                      offset: Offset(0, 2),
-                      blurRadius: 16,
-                      spreadRadius: 0,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color.fromRGBO(255, 255, 255, 1),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+            SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                scrollDirection: Axis.horizontal,
+                child: Wrap(
+                  direction: Axis.horizontal,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  alignment: WrapAlignment.start,
+                  spacing: 12,
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Matematika",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              color: Color.fromRGBO(36, 36, 36, 1),
-                              fontFamily: 'SF Pro Text',
-                              fontSize: 24,
-                              letterSpacing: 0,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Row(
-                            children: [
-                              SvgPicture.asset("assets/svg/lesson/play.svg"),
-                              const SizedBox(width: 10),
-                              Text("2"),
-                              const SizedBox(width: 16),
-                              SvgPicture.asset("assets/svg/lesson/clock.svg"),
-                              const SizedBox(width: 10),
-                              Text("23 soat"),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          WButton(
-                            text: "Davom etish",
-                            verticalPadding: 8,
-                            horizontalPadding: 12,
-                            borderRadius: 10,
-                            fontSize: 16,
-                            onTap: () => {},
-                            fontWeight: FontWeight.w500,
-                            textColor: AppColors.white,
-                            color: AppColors.mainColor,
-                          ),
-                        ],
-                      ),
+                    WButton(
+                      text: "All",
+                      fontSize: 12,
+                      borderRadius: 20,
+                      verticalPadding: 8,
+                      horizontalPadding: 12,
+                      color: AppColors.mainColor,
+                      textColor: AppColors.white,
+                      onTap: () => {},
                     ),
-                    const SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: Stack(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            height: 100,
-                            child: CircularProgressIndicatorClass(),
-                          ),
-                          Positioned(
-                            top: 0,
-                            bottom: 0,
-                            child: SizedBox(
-                              width: 100,
-                              height: 100,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Barchasi',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  IntrinsicWidth(
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          '2',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: Color(0xFF242424),
-                                          ),
-                                        ),
-                                        Divider(
-                                          color: Color(0xFF929292),
-                                          height: 1,
-                                          thickness: 1,
-                                        ),
-                                        Text(
-                                          "35",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                    for (int i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4])
+                      WButton(
+                        text: "Business",
+                        fontSize: 12,
+                        borderRadius: 20,
+                        verticalPadding: 5,
+                        horizontalPadding: 12,
+                        color: AppColors.mainColor,
+                        textColor: AppColors.mainColor,
+                        buttonType: ButtonType.outline,
+                        onTap: () => {},
                       ),
-                    ),
                   ],
                 ),
               ),
+            ),
+            Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              children: [
+                for (int i in [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20,
+                  21,
+                  22,
+                  23,
+                  24,
+                  25,
+                ])
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CoursePage(),
+                      ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: AppColors.white,
+                      ),
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width > 800
+                            ? 165
+                            : MediaQuery.of(context).size.width / 2 - 30,
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            clipBehavior: Clip.none,
+                            children: <Widget>[
+                              Image.network(
+                                'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
+                                height: 88,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child; // When image is loaded
+                                  } else {
+                                    // While the image is loading, show a progress indicator
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                (loadingProgress
+                                                        .expectedTotalBytes ??
+                                                    1)
+                                            : null,
+                                      ),
+                                    );
+                                  }
+                                },
+                                errorBuilder: (BuildContext context,
+                                    Object error, StackTrace? stackTrace) {
+                                  return const Text(
+                                      'Failed to load image'); // Error handling
+                                },
+                              ),
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                                child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: const BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color(0x801B1B1B),
+                                          Color(0x001B1B1B),
+                                        ],
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                      ),
+                                    ),
+                                    child: const Text(
+                                      "#Matematika",
+                                      style: TextStyle(
+                                        color: AppColors.mainColor,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                      ),
+                                    )),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "VUE JS SCRATCH COURSE",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  "Vue (pronounced /vjuː/, like view) is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with modern tooling and supporting libraries.",
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    SvgPicture.asset("assets/svg/nav/star.svg"),
+                                    const SizedBox(width: 4),
+                                    const Text(
+                                      "355",
+                                      style: TextStyle(
+                                        color: AppColors.mainColor,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    const Text(
+                                      "\$24",
+                                      style: TextStyle(
+                                          color: AppColors.c_1b,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 8),
+                                const LinearProgressIndicator(
+                                  value: 0.4,
+                                  backgroundColor: AppColors.c_e0,
+                                  color: AppColors.mainColor,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(2),
+                                  ),
+                                  semanticsLabel: 'Linear progress indicator',
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  "3/10 completed",
+                                  style: TextStyle(
+                                    color: AppColors.c_07,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Divider(
+                            color: AppColors.mainColor,
+                            height: 1,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              spacing: -8,
+                              children: [
+                                for (int i in [
+                                  1,
+                                  2,
+                                  3,
+                                  4,
+                                ])
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.network(
+                                      'https://picsum.photos/250?image=$i',
+                                      height: 24,
+                                      width: 24,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                WButton(
+                                  text: "+255",
+                                  textColor: AppColors.c_a1,
+                                  fontSize: 12,
+                                  verticalPadding: 0,
+                                  color: AppColors.transparent,
+                                  onTap: () => {},
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ],
         ),
       ),
@@ -180,7 +293,8 @@ class _CircularProgressIndicatorClassState
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        backgroundColor: AppColors.transparent,
+        // backgroundColor: AppColors.transparent,
+        backgroundColor: AppColors.backgroundColor,
         body: SizedBox(
           width: 100,
           height: 100,

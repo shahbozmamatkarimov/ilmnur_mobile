@@ -9,11 +9,18 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: HomeRoute.page,
           path: '/',
+          children: [
+            AutoRoute(
+              page: CourseRoute.page,
+              path: '',
+              initial: true,
+            ),
+            AutoRoute(
+              page: MainRoute.page,
+              path: 'group',
+            ),
+          ],
         ),
-        // AutoRoute(
-        //   page: PayoutsRoute.page,
-        //   path: '/payouts',
-        // ),
         // AutoRoute(
         //   page: InviteRoute.page,
         //   path: '/invite',

@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   auto_route: ^7.8.3
+  bitsdojo_window: ^0.1.6
+  window_manager: ^0.4.2
 
   #UI
   flutter_svg: ^2.0.7
@@ -56,6 +58,7 @@ flutter:
     - assets/svg/nav/
     - assets/svg/lesson/
     - assets/svg/bottomnav/
+    - assets/svg/icon/
 
   # fonts:
   #   - family: Schyler
@@ -69,6 +72,18 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
 flutter_icons:
-  android: true
+  android: "launcher_icon"
   ios: true
-  image_path: "assets/svg/logo/logo.svg"
+  image_path: "assets/svg/logo/logo.png"
+  web:
+    generate: true
+    image_path: "assets/svg/logo/logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/svg/logo/logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/svg/logo/logo.png"

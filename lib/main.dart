@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:ilmnur_mobile/config/routes/router.dart';
 import 'package:ilmnur_mobile/core/resources/app_colors.dart';
+import 'package:window_manager/window_manager.dart';
+import 'package:flutter/foundation.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (!kIsWeb) {
+    print(windowManager);
+    await windowManager.ensureInitialized();
+
+    // Set window properties
+    await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
+  }
+  // await windowManager.ensureInitialized();
+
+  // // Set window properties
+  // await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
   final _router = AppRouter();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
