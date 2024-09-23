@@ -34,9 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final isDesktop = Responsive.isDesktop(context);
     return AutoTabsRouter(
-      routes: const [
-        MainRoute(),
-        CourseRoute(),
+      routes: [
+        MainRoute(id: 1),
+        const CoursesRoute(),
+        const CourseRoute(),
+        LessonRoute(lessonId: 1),
         // const CommunityTabRoute(),
         // SearchRoute(),
         // NotificationRoute(),
@@ -52,28 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: AppColors.backgroundColor,
           key: _scaffoldKey,
           drawer: !isDesktop
-              ? Drawer(
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: [
-                      // const DrawerHeader(
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.blue,
-                      //   ),
-                      //   child: Text('Drawer Header'),
-                      // ),
-                      ListTile(
-                        title: const Text('Home'),
-                        // selected: _selectedIndex == 0,
-                        onTap: () {
-                          // Update the state of the app
-                          // _onItemTapped(0);
-                          // Then close the drawer
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  ),
+              ? const Drawer(
+                  width: 270,
+                  backgroundColor: AppColors.white,
+                  child: SideMenuWidget(),
                 )
               : null,
           appBar: PreferredSize(
@@ -150,15 +134,26 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 if (isDesktop)
-                  const SizedBox(
+                  Container(
+                    margin: const EdgeInsets.all(16),
                     width: 270,
-                    child: SizedBox(
+                    child: const SizedBox(
                       child: SideMenuWidget(),
                     ),
                   ),
                 Expanded(
                   // flex: 7,
-                  child: child,
+                  child: Container(
+                    margin: isDesktop
+                        ? const EdgeInsets.only(top: 16, bottom: 16, right: 16)
+                        : null,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: isDesktop ? AppColors.white : null,
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    child: child,
+                  ),
                 ),
                 // if (isDesktop)
                 //   Expanded(

@@ -3,11 +3,11 @@ import 'package:ilmnur_mobile/core/model/menu_model.dart';
 
 class SideMenuData {
   final menu = const <MenuModel>[
-    MenuModel(icon: Icons.home, title: 'Dashboard'),
-    MenuModel(icon: Icons.person, title: 'Profile'),
-    MenuModel(icon: Icons.run_circle, title: 'Exersice'),
-    MenuModel(icon: Icons.settings, title: 'Settings'),
-    MenuModel(icon: Icons.history, title: 'History'),
-    MenuModel(icon: Icons.logout, title: 'SignOut'),
+    MenuModel(icon: "assets/svg/sidebar/lessons.svg", title: 'Lessons'),
+    MenuModel(icon: "assets/svg/sidebar/reyting.svg", title: 'Reyting'),
+    MenuModel(icon: "assets/svg/sidebar/chat.svg", title: 'Chat'),
+    MenuModel(icon: "assets/svg/sidebar/news.svg", title: 'News'),
+    MenuModel(icon: "assets/svg/sidebar/settings.svg", title: 'Settings'),
+    // MenuModel(icon: Icons.logout, title: 'SignOut'),
   ];
 }

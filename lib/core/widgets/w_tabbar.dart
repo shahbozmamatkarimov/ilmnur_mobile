@@ -57,7 +57,7 @@ class _WTabBarState extends State<WTabBar> {
         controller: widget.controllerForMainTabVarView,
         indicatorSize: TabBarIndicatorSize.label,
         indicatorWeight: 2,
-        dividerColor: AppColors.transparent,
+        dividerColor: AppColors.mainColor,
         isScrollable: true,
         indicatorColor: AppColors.mainColor,
         labelColor: AppColors.mainColor,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ilmnur_mobile/core/data/side_menu_data.dart';
 import 'package:ilmnur_mobile/core/resources/app_colors.dart';
+import 'package:auto_route/auto_route.dart';
 
 class SideMenuWidget extends StatefulWidget {
   const SideMenuWidget({super.key});
@@ -18,7 +20,6 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
 
     return Container(
       padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         color: AppColors.white,
@@ -34,24 +35,27 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
     final isSelected = selectedIndex == index;
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+      // margin: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
-          Radius.circular(6.0),
+          Radius.circular(8.0),
         ),
         color: isSelected ? AppColors.mainColor : Colors.transparent,
       ),
       child: InkWell(
-        onTap: () => setState(() {
-          selectedIndex = index;
-        }),
+        onTap: () => {
+          if (index == 0) {context.router.pushNamed("/")},
+          setState(() {
+            selectedIndex = index;
+          }),
+        },
         child: Row(
           children: [
             SizedBox(
-              child: Icon(
+              child: SvgPicture.asset(
                 data.menu[index].icon,
-                color: isSelected ? AppColors.white : AppColors.c_55,
+                color: isSelected ? AppColors.white : null,
               ),
             ),
             const SizedBox(width: 10),

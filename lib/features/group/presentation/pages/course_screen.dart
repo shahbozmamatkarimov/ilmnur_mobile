@@ -1,24 +1,29 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ilmnur_mobile/config/routes/router.gr.dart';
 import 'package:ilmnur_mobile/core/resources/app_colors.dart';
 import 'package:ilmnur_mobile/core/widgets/w_button.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:ilmnur_mobile/features/group/presentation/pages/main_screen.dart';
+import 'package:ilmnur_mobile/features/lesson/presentation/pages/lesson_screen.dart';
 
-// class CoursePage extends StatefulWidget {
-//   const CoursePage({super.key});
+// class CourseScreen extends StatefulWidget {
+//   const CourseScreen({super.key});
 
 //   @override
-//   State<CoursePage> createState() => _CoursePageState();
+//   State<CourseScreen> createState() => _CourseScreenState();
 // }
-class CoursePage extends StatefulWidget {
-  const CoursePage({super.key});
+@RoutePage()
+class CourseScreen extends StatefulWidget {
+  const CourseScreen({super.key});
 
   @override
-  State<CoursePage> createState() => _CoursePageState();
+  State<CourseScreen> createState() => _CourseScreenState();
 }
 
 /// Main example page
-class _CoursePageState extends State<CoursePage> {
+class _CourseScreenState extends State<CourseScreen> {
   final List<List<dynamic>> courseDropdown = [
     ["Edit course", () => {}],
     ["Add set", () => {}],
@@ -121,7 +126,7 @@ class _CoursePageState extends State<CoursePage> {
   @override
   build(context) => Scaffold(
         // backgroundColor: Colors.blueGrey[100],
-        backgroundColor: AppColors.backgroundColor,
+        backgroundColor: AppColors.transparent,
         appBar: AppBar(
           backgroundColor: AppColors.white,
           title: Row(
@@ -452,6 +457,8 @@ class _CoursePageState extends State<CoursePage> {
                                 backgroundColor: e['isExpanded']
                                     ? AppColors.mainColor
                                     : AppColors.white,
+                                splashColor: AppColors.backgroundColor,
+                                highlightColor: AppColors.backgroundColor,
                                 canTapOnHeader: true,
                                 headerBuilder:
                                     (BuildContext _, bool isExpanded) {
@@ -582,7 +589,7 @@ class _CoursePageState extends State<CoursePage> {
                                 isExpanded: e['isExpanded'],
                                 body: Column(
                                   children: [
-                                    for (String _ in e["lessons"])
+                                    for (dynamic i in e["lessons"])
                                       SizedBox(
                                         width: double.infinity,
                                         child: WButton(
@@ -592,13 +599,11 @@ class _CoursePageState extends State<CoursePage> {
                                           buttonPositionType:
                                               MainAxisAlignment.start,
                                           text: "",
-                                          onTap: () => {},
-                                          // onTap: () => Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => Module(),
-                                          //   ),
-                                          // ),
+                                          onTap: () {
+                                            context.router.push(
+                                              LessonRoute(lessonId: 4),
+                                            );
+                                          },
                                           child: Expanded(
                                             child: Padding(
                                               padding: const EdgeInsets.only(

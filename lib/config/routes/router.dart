@@ -11,13 +11,21 @@ class AppRouter extends $AppRouter {
           path: '/',
           children: [
             AutoRoute(
-              page: CourseRoute.page,
+              page: CoursesRoute.page,
               path: '',
-              initial: true,
+              // initial: true,
             ),
             AutoRoute(
               page: MainRoute.page,
-              path: 'group',
+              path: 'group/:id',
+            ),
+            AutoRoute(
+              page: CourseRoute.page,
+              path: 'course',
+            ),
+            AutoRoute(
+              page: LessonRoute.page,
+              path: 'lesson/:lessonId',
             ),
           ],
         ),
