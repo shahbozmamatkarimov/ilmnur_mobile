@@ -24,19 +24,19 @@ class _LessonService implements LessonService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<HttpResponse<List<Lesson>>> getLessons() async {
+  Future<HttpResponse<Lesson>> getLesson(int id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<HttpResponse<List<Lesson>>>(Options(
+    final _options = _setStreamType<HttpResponse<Lesson>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'subject',
+          'video_lesson/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -45,12 +45,10 @@ class _LessonService implements LessonService {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<Lesson> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late Lesson _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => Lesson.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value = Lesson.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

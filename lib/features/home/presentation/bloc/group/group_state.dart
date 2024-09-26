@@ -9,7 +9,7 @@ class GroupInitial extends GroupState {
   List<Object> get props => [];
 }
 
-class Loading extends GroupState {
+class GroupLoading extends GroupState {
   @override
   List<Object> get props => [];
 }

@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:ilmnur_mobile/features/home/data/models/group/creategroup.dart';
 import 'package:ilmnur_mobile/features/home/data/models/group/group.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:ilmnur_mobile/core/network/urls.dart';
+import 'package:ilmnur_mobile/core/network/dio_manager.dart';
 
 part 'group_service.g.dart';
 
@@ -10,10 +12,14 @@ abstract class GroupService {
   factory GroupService(Dio dio, {String baseUrl}) = _GroupService;
 
   factory GroupService.create() {
-    final dio = Dio();
+    // final dio = Dio();
+    final dio = DioManager.getDio;
     return GroupService(dio);
   }
 
   @GET("group")
   Future<HttpResponse<List<Group>>> getGroups();
+
+  @POST("group/create")
+  Future<HttpResponse<CreateGroupModel>> createGroup(@Body() FormData groupData);
 }

@@ -9,15 +9,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
-import 'package:ilmnur_mobile/features/group/presentation/pages/course_screen.dart'
-    as _i1;
-import 'package:ilmnur_mobile/features/group/presentation/pages/main_screen.dart'
+import 'package:ilmnur_mobile/features/course/presentation/pages/main_screen.dart'
     as _i5;
 import 'package:ilmnur_mobile/features/home/presentation/pages/courses_screen.dart'
     as _i2;
 import 'package:ilmnur_mobile/features/home/presentation/pages/home_screen.dart'
     as _i3;
-import 'package:ilmnur_mobile/features/lesson/presentation/pages/lesson_screen.dart'
+import 'package:ilmnur_mobile/features/lessons/presentation/pages/lessons_screen.dart'
+    as _i1;
+import 'package:ilmnur_mobile/features/user/presentation/pages/lesson_screen.dart'
     as _i4;
 
 abstract class $AppRouter extends _i6.RootStackRouter {
@@ -26,9 +26,10 @@ abstract class $AppRouter extends _i6.RootStackRouter {
   @override
   final Map<String, _i6.PageFactory> pagesMap = {
     CourseRoute.name: (routeData) {
+      final args = routeData.argsAs<CourseRouteArgs>();
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.CourseScreen(),
+        child: _i1.CourseScreen(courseId: args.courseId),
       );
     },
     CoursesRoute.name: (routeData) {
@@ -62,16 +63,31 @@ abstract class $AppRouter extends _i6.RootStackRouter {
 
 /// generated route for
 /// [_i1.CourseScreen]
-class CourseRoute extends _i6.PageRouteInfo<void> {
-  const CourseRoute({List<_i6.PageRouteInfo>? children})
-      : super(
+class CourseRoute extends _i6.PageRouteInfo<CourseRouteArgs> {
+  CourseRoute({
+    required int courseId,
+    List<_i6.PageRouteInfo>? children,
+  }) : super(
           CourseRoute.name,
+          args: CourseRouteArgs(courseId: courseId),
           initialChildren: children,
         );
 
   static const String name = 'CourseRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i6.PageInfo<CourseRouteArgs> page =
+      _i6.PageInfo<CourseRouteArgs>(name);
+}
+
+class CourseRouteArgs {
+  const CourseRouteArgs({required this.courseId});
+
+  final int courseId;
+
+  @override
+  String toString() {
+    return 'CourseRouteArgs{courseId: $courseId}';
+  }
 }
 
 /// generated route for

@@ -8,3 +8,12 @@ class GetGroups extends GroupEvent {
   @override
   List<Object?> get props => [];
 }
+
+class CreateGroup extends GroupEvent {
+  final CreateGroupModel group;
+
+  CreateGroup({required this.group});
+
+  @override
+  List<Object> get props => [group];
+}

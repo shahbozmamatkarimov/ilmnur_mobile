@@ -14,6 +14,9 @@ abstract class LessonService {
     return LessonService(dio);
   }
 
-  @GET("subject")
-  Future<HttpResponse<List<Lesson>>> getLessons();
+  // @GET("subject")
+  // Future<HttpResponse<List<Lesson>>> getLessons();
+
+  @GET("video_lesson/{id}")
+  Future<HttpResponse<Lesson>> getLesson(@Path("id") int id);
 }

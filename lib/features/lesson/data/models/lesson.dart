@@ -8,12 +8,16 @@ part 'lesson.g.dart'; // Ensure this matches your filename
 class Lesson {
   final int id;
   final String title;
+  final String content;
+  final String video;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   Lesson({
     required this.id,
     required this.title,
+    required this.content,
+    required this.video,
     required this.createdAt,
     required this.updatedAt,
   });

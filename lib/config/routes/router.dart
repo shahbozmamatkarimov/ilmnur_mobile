@@ -21,7 +21,7 @@ class AppRouter extends $AppRouter {
             ),
             AutoRoute(
               page: CourseRoute.page,
-              path: 'course',
+              path: 'course/:courseId',
             ),
             AutoRoute(
               page: LessonRoute.page,

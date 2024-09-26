@@ -21,7 +21,8 @@ class ImplLessonRepo extends LessonRepo {
   Future<List<Lesson>?> _getLessonsFromPreferences() async {
     await _initializePreferences(); // Ensure SharedPreferences is initialized
 
-    final List<String>? lessonJsonStrings = preferences?.getStringList('Lessons');
+    final List<String>? lessonJsonStrings =
+        preferences?.getStringList('Lessons');
 
     if (lessonJsonStrings == null) {
       return null;
@@ -33,30 +34,30 @@ class ImplLessonRepo extends LessonRepo {
   }
 
   // Save lessons to SharedPreferences
-  Future<void> _saveLessonsToPreferences(List<Lesson> lessons) async {
-    await _initializePreferences(); // Ensure SharedPreferences is initialized
+  // Future<void> _saveLessonsToPreferences(Lesson lessons) async {
+  //   await _initializePreferences(); // Ensure SharedPreferences is initialized
 
-    final List<String> lessonJsonStrings = lessons.map((lesson) {
-      return jsonEncode(lesson.toJson());
-    }).toList();
+  //   final List<String> lessonJsonStrings = lessons.map((lesson) {
+  //     return jsonEncode(lesson.toJson());
+  //   }).toList();
 
-    preferences?.setStringList('Lessons', lessonJsonStrings);
-  }
+  //   preferences?.setStringList('Lessons', lessonJsonStrings);
+  // }
 
   @override
-  Future<DataState<List<Lesson>>> getLessons() async {
+  Future<DataState<Lesson>> getLesson(int id) async {
     try {
       final List<Lesson>? lessons = await _getLessonsFromPreferences();
       print(lessons);
       if (lessons != null && lessons.isNotEmpty) {
-        return DataSuccess<List<Lesson>>(data: lessons);
+        // return DataSuccess<List<Lesson>>(data: lessons);
       }
-      final response = await lessonService.getLessons();
-      await _saveLessonsToPreferences(response.data);
-      return DataSuccess<List<Lesson>>(data: response.data);
+      final response = await lessonService.getLesson(id);
+      // await _saveLessonsToPreferences(response.data);
+      return DataSuccess<Lesson>(data: response.data);
     } catch (e) {
       print(e);
-      return DataException.getError<List<Lesson>>(e);
+      return DataException.getError<Lesson>(e);
     }
   }
 }

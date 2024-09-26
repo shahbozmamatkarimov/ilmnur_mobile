@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:ilmnur_mobile/core/error/exception_handler.dart';
+import 'package:ilmnur_mobile/features/home/data/models/group/creategroup.dart';
 import 'package:ilmnur_mobile/features/home/data/models/group/group.dart';
 import 'package:ilmnur_mobile/core/resources/data_state.dart';
 import 'package:ilmnur_mobile/features/home/domain/repositories/group_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data_sources/group/group_service.dart';
+import 'package:path/path.dart' as path;
 
 class ImplGroupRepo extends GroupRepo {
   final GroupService groupService;
@@ -51,10 +54,35 @@ class ImplGroupRepo extends GroupRepo {
         // return DataSuccess<List<Group>>(data: group);
       }
       final response = await groupService.getGroups();
+      print("Highlight");
+      print(response.data);
       await _saveGroupToPreferences(response.data);
       return DataSuccess<List<Group>>(data: response.data);
     } catch (e) {
       print(e);
+      return DataException.getError<List<Group>>(e);
+    }
+  }
+
+  @override
+  Future<DataState<List<Group>>> createGroup(
+      CreateGroupModel groupData) async {
+    try {
+      FormData formData = FormData.fromMap({
+        'title': groupData.title,
+        'description': groupData.description,
+        'image': await MultipartFile.fromFile(groupData.cover,
+            filename: path.basename(groupData.cover)), // Ensure filename is set
+      });
+      final response =
+          await groupService.createGroup(formData); // Pass the group data
+      final res = await groupService.getGroups();
+
+      print("Group Created: ${response.data}");
+      // Optionally save the created group to preferences or handle it further
+      return DataSuccess<List<Group>>(data: res.data);
+    } catch (e) {
+      print("##$e");
       return DataException.getError<List<Group>>(e);
     }
   }

@@ -5,8 +5,8 @@ import 'package:ilmnur_mobile/config/routes/router.gr.dart';
 import 'package:ilmnur_mobile/core/resources/app_colors.dart';
 import 'package:ilmnur_mobile/core/widgets/w_button.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:ilmnur_mobile/features/group/presentation/pages/lessons_screen.dart';
-import 'package:ilmnur_mobile/features/group/presentation/pages/main_screen.dart';
+import 'package:ilmnur_mobile/features/course/presentation/pages/lessons_screen.dart';
+import 'package:ilmnur_mobile/features/course/presentation/pages/main_screen.dart';
 import 'package:ilmnur_mobile/features/home/data/data_sources/group/group_service.dart';
 import 'package:ilmnur_mobile/features/home/data/repositories/impl_group_repo.dart';
 import 'package:ilmnur_mobile/features/home/presentation/bloc/group/group_bloc.dart';
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             ),
             child: BlocBuilder<GroupBloc, GroupState>(
               builder: (context, state) {
-                if (state is Loading) {
+                if (state is GroupLoading) {
                   return SingleChildScrollView(
                     child: Wrap(
                       spacing: 20,
@@ -158,9 +158,10 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                               const SizedBox(width: 8),
-                                              const Text(
-                                                "Kitani Studio",
+                                              Text(
+                                                "${i.user.name} ${i.user.surname}",
                                                 style: TextStyle(
+                                                    color: AppColors.white,
                                                     fontSize: 12,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -205,9 +206,9 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                             const SizedBox(width: 8),
-                                            const Text(
-                                              "\$2 - \$24",
-                                              style: TextStyle(
+                                            Text(
+                                              "\$${i.low_price} - \$${i.high_price}",
+                                              style: const TextStyle(
                                                   color: AppColors.c_1b,
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w600),
@@ -220,7 +221,8 @@ class _HomePageState extends State<HomePage> {
                                           runSpacing: 8,
                                           children: [
                                             WButton(
-                                              text: "3 courses",
+                                              text:
+                                                  "${i.courses_count} courses",
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500,
                                               textColor: AppColors.c_07,

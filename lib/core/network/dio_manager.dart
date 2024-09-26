@@ -18,8 +18,11 @@ abstract class DioManager {
     dio.options.followRedirects = true;
     dio.options.maxRedirects = 5;
     dio.options.contentType = 'application/json';
+    dio.options.headers['Authorization'] = 'Bearer token';
     dio.options.headers.addAll({
       "Accept": "application/json",
+      "Authorization":
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3MjUzOTU2LCJleHAiOjE3MjgxMTc5NTZ9.vPb8dXRj2jO-gzZEqrtt7hYCqf71agOvlZck6P-HL8o"
     });
 
     return dio;
