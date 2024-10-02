@@ -28,7 +28,7 @@ class WButton extends StatefulWidget {
       {Key? key,
       required this.text,
       required this.onTap,
-      this.color = AppColors.white,
+      this.color = AppColors.transparent,
       this.borderRadius = 10.0,
       this.showLoader = false,
       this.verticalPadding = 16,

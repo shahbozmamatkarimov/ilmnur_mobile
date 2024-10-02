@@ -27,7 +27,19 @@ class AppRouter extends $AppRouter {
               page: LessonRoute.page,
               path: 'lesson/:lessonId',
             ),
+            AutoRoute(
+              page: ReytingRoute.page,
+              path: 'reyting',
+            ),
+            AutoRoute(
+              page: NewsRoute.page,
+              path: 'news',
+            ),
           ],
+        ),
+        AutoRoute(
+          page: TestsRoute.page,
+          path: '/test/:testId',
         ),
         // AutoRoute(
         //   page: InviteRoute.page,

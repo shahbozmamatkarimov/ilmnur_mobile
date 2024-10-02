@@ -91,6 +91,9 @@ flutter:
     - assets/svg/icon/
     - assets/svg/sidebar/
     - assets/svg/video/
+    - assets/svg/reyting/
+    - assets/svg/news/
+    - assets/svg/test/
 
   # fonts:
   #   - family: Schyler

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ilmnur_mobile/features/course/data/models/createcourse.dart';
 import 'package:ilmnur_mobile/features/course/presentation/bloc/course/course_bloc.dart';
 import 'package:ilmnur_mobile/features/home/data/models/group/group.dart';
 import 'package:ilmnur_mobile/features/home/data/models/group/creategroup.dart';
@@ -90,15 +91,18 @@ class _AddCourseModalState extends State<AddCourseModal> {
 
               print(_image);
               print(_image!.path);
-              // context.read<CourseBloc>().add(
-              //       CreateGroup(
-              //         group: CreateGroupModel(
-              //           title: title,
-              //           description: description,
-              //           cover: _image!.path,
-              //         ),
-              //       ),
-              //     );
+              context.read<CourseBloc>().add(
+                    CreateCourse(
+                      course: CreateCourseModel(
+                        title: title,
+                        description: description,
+                        image: _image!.path,
+                        price: 10,
+                        discount: 0,
+                        group_id: 1,
+                      ),
+                    ),
+                  );
               Navigator.of(context).pop(); // Close the dialog
             }
           },

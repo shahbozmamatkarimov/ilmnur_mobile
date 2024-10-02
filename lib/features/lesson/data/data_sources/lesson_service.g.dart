@@ -36,7 +36,7 @@ class _LessonService implements LessonService {
     )
         .compose(
           _dio.options,
-          'video_lesson/${id}',
+          'lesson/getById/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

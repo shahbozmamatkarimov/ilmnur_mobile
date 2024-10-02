@@ -9,7 +9,8 @@ part of 'lessons.dart';
 Lessons _$LessonsFromJson(Map<String, dynamic> json) => Lessons(
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
-      video_lesson: (json['video_lesson'] as List<dynamic>?)
+      type: json['type'] as String,
+      lessons: (json['lessons'] as List<dynamic>?)
           ?.map((e) => VideoLesson.fromJson(e as Map<String, dynamic>))
           .toList(),
       createdAt: DateTime.parse(json['createdAt'] as String),
@@ -19,7 +20,8 @@ Lessons _$LessonsFromJson(Map<String, dynamic> json) => Lessons(
 Map<String, dynamic> _$LessonsToJson(Lessons instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'video_lesson': instance.video_lesson,
+      'type': instance.type,
+      'lessons': instance.lessons,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

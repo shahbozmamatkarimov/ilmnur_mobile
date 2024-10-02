@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ilmnur_mobile/config/routes/router.gr.dart';
 import 'package:ilmnur_mobile/core/resources/app_colors.dart';
 import 'package:ilmnur_mobile/core/util/responsive.dart';
 import 'package:ilmnur_mobile/core/widgets/w_button.dart';
@@ -184,6 +185,21 @@ class _LessonScreenState extends State<LessonScreen>
                                         )
                                       : const Center(
                                           child: CircularProgressIndicator()),
+                                  Positioned(
+                                    top: 16,
+                                    left: 16,
+                                    child: WButton(
+                                      text: "",
+                                      verticalPadding: 0,
+                                      horizontalPadding: 0,
+                                      color: AppColors.transparent,
+                                      onTap: () => {
+                                        Navigator.pop(context),
+                                      },
+                                      child: SvgPicture.asset(
+                                          "assets/svg/icon/backroute.svg"),
+                                    ),
+                                  ),
                                   Positioned(
                                     bottom: 0,
                                     left: 0,
@@ -552,12 +568,33 @@ class LectureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 14),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 14, // Font size of the text
+    return Scaffold(
+      backgroundColor: AppColors.transparent,
+      bottomNavigationBar: BottomAppBar(
+        color: AppColors.transparent,
+        height: 48,
+        padding: const EdgeInsets.all(0),
+        child: WButton(
+          text: 'Start test',
+          color: AppColors.mainColor,
+          textColor: AppColors.white,
+          verticalPadding: 10,
+          onTap: () {
+            context.router.push(
+              TestsRoute(testId: 1),
+            );
+          },
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 14),
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 14, // Font size of the text
+            ),
+          ),
         ),
       ),
     );

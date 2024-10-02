@@ -21,14 +21,14 @@ import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
 
 @RoutePage()
-class LessonScreen extends StatefulWidget {
+class UserScreen extends StatefulWidget {
   final int lessonId;
-  LessonScreen({required this.lessonId});
+  UserScreen({required this.lessonId});
   @override
-  State<LessonScreen> createState() => _LessonScreenState();
+  State<UserScreen> createState() => _UserScreenState();
 }
 
-class _LessonScreenState extends State<LessonScreen>
+class _UserScreenState extends State<UserScreen>
     with SingleTickerProviderStateMixin {
   late VideoPlayerController controller;
   String currentVideoUrl = '';
@@ -184,6 +184,21 @@ class _LessonScreenState extends State<LessonScreen>
                                         )
                                       : const Center(
                                           child: CircularProgressIndicator()),
+                                  Positioned(
+                                    top: 16,
+                                    left: 16,
+                                    child: WButton(
+                                      text: "",
+                                      verticalPadding: 0,
+                                      horizontalPadding: 0,
+                                      color: AppColors.transparent,
+                                      onTap: () => {
+                                        Navigator.pop(context),
+                                      },
+                                      child: SvgPicture.asset(
+                                          "assets/svg/icon/backroute.svg"),
+                                    ),
+                                  ),
                                   Positioned(
                                     bottom: 0,
                                     left: 0,
@@ -543,6 +558,7 @@ class _LessonScreenState extends State<LessonScreen>
   }
 }
 
+
 class LectureView extends StatelessWidget {
   String text = ''; // Text to display
   bool isLoading;
@@ -552,12 +568,31 @@ class LectureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 14),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 14, // Font size of the text
+    return Scaffold(
+      floatingActionButton: ElevatedButton(
+        onPressed: () {
+          // Start test logic
+        },
+        child: Text(
+          'Start Test',
+          style: TextStyle(color: AppColors.black),
+        ),
+      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   child: ElevatedButton(
+      //     onPressed: () {
+      //       // Start test logic
+      //     },
+      //     child: Text('Start Test'),
+      //   ),
+      // ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(vertical: 14),
+        child: Text(
+          text + 'apple',
+          style: const TextStyle(
+            fontSize: 14, // Font size of the text
+          ),
         ),
       ),
     );

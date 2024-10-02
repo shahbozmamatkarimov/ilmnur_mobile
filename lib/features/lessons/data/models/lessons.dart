@@ -10,18 +10,20 @@ class Lessons {
   final int id;
   final String title;
   // final bool published;
-  final List<VideoLesson> video_lesson;
+  final String type;
+  final List<VideoLesson> lessons;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   Lessons({
     required this.id,
     required this.title,
+    required this.type,
     // required this.published,
-    List<VideoLesson>? video_lesson,
+    List<VideoLesson>? lessons,
     required this.createdAt,
     required this.updatedAt,
-  }) : video_lesson = video_lesson ?? [];
+  }) : lessons = lessons ?? [];
 
   factory Lessons.fromJson(Map<String, dynamic> json) =>
       _$LessonsFromJson(json);

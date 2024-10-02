@@ -48,11 +48,12 @@ class ImplLessonsRepo extends LessonsRepo {
   @override
   Future<DataState<CourseDto>> getLessonss(int id) async {
     try {
-      final List<Lessons>? lessons = await _getLessonssFromPreferences();
-      if (lessons != null && lessons.isNotEmpty) {
-        // return DataSuccess<List<Lessons>>(data: lessons);
-      }
+      // final List<Lessons>? lessons = await _getLessonssFromPreferences();
+      // if (lessons != null && lessons.isNotEmpty) {
+      //   // return DataSuccess<List<Lessons>>(data: lessons);
+      // }
       final response = await lessonsService.getLessonss(id);
+      print(response);
       await _saveLessonssToPreferences(response.data.lessons);
       return DataSuccess<CourseDto>(data: response.data);
     } catch (e) {

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 part of 'group_bloc.dart';
 
 abstract class GroupState extends Equatable {
@@ -20,19 +22,21 @@ class LoggedOut extends GroupState {
 }
 
 class LoadedGroupData extends GroupState {
-  final List<Group> group;
+  final List<Group> groups;
+  final List<Group> my_groups;
   final StateStatus status;
   final String? error;
   final int tabIndex;
   const LoadedGroupData({
-    required this.group,
+    required this.groups,
+    required this.my_groups,
     this.error,
     this.status = StateStatus.normal,
     this.tabIndex = 0,
   });
 
   @override
-  List<Object> get props => [group, status, tabIndex];
+  List<Object> get props => [groups, status, tabIndex];
 }
 
 class SuccessUpdate extends GroupState {

@@ -8,6 +8,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:ilmnur_mobile/features/lessons/data/data_sources/lessons_service.dart';
 import 'package:ilmnur_mobile/features/lessons/data/repositories/impl_lessons_repo.dart';
 import 'package:ilmnur_mobile/features/lessons/presentation/bloc/group/lessons_bloc.dart';
+import 'package:ilmnur_mobile/features/lessons/presentation/widgets/lessonAccordion.dart';
 import 'package:shimmer/shimmer.dart';
 
 // class CourseScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _CourseScreenState extends State<CourseScreen> {
   List myTiles = [];
 
   // List<String> myTiles = ['Item 1', 'Item 2', 'Item 3'];
-  late int _isExpanded = 0;
+  late int isExpanded = 0;
   late bool oldExpanded;
   int count = 0;
 
@@ -48,8 +49,8 @@ class _CourseScreenState extends State<CourseScreen> {
 
   final List<List<dynamic>> courseDropdown = [
     ["Edit course", () => {}],
-    ["Add set", () => {}],
-    ["Add modul", () => {}],
+    ["Add module", () => {}],
+    ["Add lesson", () => {}],
   ];
 
   final List<String> setDropdown = [
@@ -451,39 +452,30 @@ class _CourseScreenState extends State<CourseScreen> {
                             children: [
                               for (int i = 0; i < lessons.length; i++)
                                 Container(
-                                  key: ValueKey([i]),
+                                  key: ValueKey(lessons[i].id),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: _isExpanded == lessons[i].id
+                                    color: isExpanded == lessons[i].id
                                         ? AppColors.mainColor
                                         : AppColors.backgroundColor,
                                   ),
                                   clipBehavior: Clip.hardEdge,
                                   child: Column(
                                     children: [
-                                      ListTile(
-                                        title: Text(lessons[i].title),
-                                        trailing: Transform.rotate(
-                                          angle: _isExpanded == lessons[i].id
-                                              ? 180 * (3.14 / 180)
-                                              : 0, // Rotate 45 degrees
-                                          child: SvgPicture.asset(
-                                              "assets/svg/icon/arrow.svg"),
-                                        ),
-                                        leading: ReorderableDragStartListener(
-                                          index: i,
-                                          child: Icon(Icons.drag_handle),
-                                        ),
-                                        onTap: () {
+                                      LessonAccordion(
+                                        i: i,
+                                        isExpanded: isExpanded,
+                                        onToggle: (newExpandedState) {
                                           setState(() {
-                                            _isExpanded =
-                                                _isExpanded == lessons[i].id
+                                            isExpanded =
+                                                isExpanded == newExpandedState
                                                     ? 0
-                                                    : lessons[i].id;
+                                                    : newExpandedState;
                                           });
                                         },
+                                        lesson: lessons[i],
                                       ),
-                                      if (_isExpanded == lessons[i].id)
+                                      if (isExpanded == lessons[i].id)
                                         Padding(
                                           padding: const EdgeInsets.only(
                                             left: 10,
@@ -494,68 +486,80 @@ class _CourseScreenState extends State<CourseScreen> {
                                             children: [
                                               for (int lesson = 0;
                                                   lesson <
-                                                      lessons[i]
-                                                          .video_lesson
-                                                          .length;
+                                                      lessons[i].lessons.length;
                                                   lesson++)
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    context.router.push(
-                                                      LessonRoute(
-                                                          lessonId: lessons[i]
-                                                              .video_lesson[
-                                                                  lesson]
-                                                              .id),
-                                                    );
+                                                LessonAccordion(
+                                                  i: lesson,
+                                                  isExpanded: isExpanded,
+                                                  onToggle: (newExpandedState) {
+                                                    setState(() {
+                                                      isExpanded = isExpanded ==
+                                                              newExpandedState
+                                                          ? 0
+                                                          : newExpandedState;
+                                                    });
                                                   },
-                                                  child: Container(
-                                                    key: ValueKey([i]),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      color: _isExpanded ==
-                                                              lessons[i]
-                                                                  .video_lesson[
-                                                                      lesson]
-                                                                  .id
-                                                          ? AppColors.mainColor
-                                                          : AppColors
-                                                              .backgroundColor,
-                                                    ),
-                                                    clipBehavior: Clip.hardEdge,
-                                                    child: Column(
-                                                      children: [
-                                                        ListTile(
-                                                          title: Text(lessons[i]
-                                                              .video_lesson[
-                                                                  lesson]
-                                                              .title),
-                                                          trailing:
-                                                              Transform.rotate(
-                                                            angle: _isExpanded ==
-                                                                    lessons[i]
-                                                                        .video_lesson[
-                                                                            lesson]
-                                                                        .id
-                                                                ? 180 *
-                                                                    (3.14 / 180)
-                                                                : 0, // Rotate 45 degrees
-                                                            child: SvgPicture.asset(
-                                                                "assets/svg/icon/arrow.svg"),
-                                                          ),
-                                                          leading:
-                                                              ReorderableDragStartListener(
-                                                            index: lesson,
-                                                            child: const Icon(
-                                                                Icons
-                                                                    .drag_handle),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
+                                                  lesson: lessons[i]
+                                                      .lessons[lesson],
                                                 ),
+                                              // GestureDetector(
+                                              //   onTap: () {
+                                              //     context.router.push(
+                                              //       LessonRoute(
+                                              //           lessonId: lessons[i]
+                                              //               .lessons[lesson]
+                                              //               .id),
+                                              //     );
+                                              //   },
+                                              //   child: Container(
+                                              //     key: ValueKey(lessons[i]
+                                              //         .lessons[lesson]
+                                              //         .id),
+                                              //     decoration: BoxDecoration(
+                                              //       borderRadius:
+                                              //           BorderRadius.circular(
+                                              //               8),
+                                              //       color: isExpanded ==
+                                              //               lessons[i]
+                                              //                   .lessons[
+                                              //                       lesson]
+                                              //                   .id
+                                              //           ? AppColors.mainColor
+                                              //           : AppColors
+                                              //               .backgroundColor,
+                                              //     ),
+                                              //     clipBehavior: Clip.hardEdge,
+                                              //     child: Column(
+                                              //       children: [
+                                              //         ListTile(
+                                              //           title: Text(lessons[i]
+                                              //               .lessons[lesson]
+                                              //               .title),
+                                              //           trailing:
+                                              //               Transform.rotate(
+                                              //             angle: isExpanded ==
+                                              //                     lessons[i]
+                                              //                         .lessons[
+                                              //                             lesson]
+                                              //                         .id
+                                              //                 ? 180 *
+                                              //                     (3.14 / 180)
+                                              //                 : 0, // Rotate 45 degrees
+                                              //             child: SvgPicture.asset(
+                                              //                 "assets/svg/icon/arrow.svg"),
+                                              //           ),
+                                              //           leading:
+                                              //               ReorderableDragStartListener(
+                                              //             index: i,
+                                              //             child: const Icon(
+                                              //                 Icons
+                                              //                     .drag_handle),
+                                              //           ),
+                                              //         ),
+                                              //       ],
+                                              //     ),
+                                              //   ),
+                                              // ),
                                             ],
                                           ),
                                         ),

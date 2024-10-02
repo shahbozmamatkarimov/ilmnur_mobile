@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ilmnur_mobile/features/home/data/models/group/GroupDto.dart';
 import 'package:ilmnur_mobile/features/home/data/models/group/creategroup.dart';
 import 'package:ilmnur_mobile/features/home/data/models/group/group.dart';
 import 'package:retrofit/retrofit.dart';
@@ -18,7 +19,7 @@ abstract class GroupService {
   }
 
   @GET("group")
-  Future<HttpResponse<List<Group>>> getGroups();
+  Future<HttpResponse<GroupDto>> getGroups();
 
   @POST("group/create")
   Future<HttpResponse<CreateGroupModel>> createGroup(@Body() FormData groupData);

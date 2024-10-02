@@ -17,6 +17,7 @@ import 'package:ilmnur_mobile/features/home/data/repositories/impl_group_repo.da
 import 'package:ilmnur_mobile/features/home/presentation/bloc/category/category_bloc.dart';
 import 'package:ilmnur_mobile/features/home/presentation/bloc/group/group_bloc.dart';
 import 'package:ilmnur_mobile/features/home/presentation/pages/home_page.dart';
+import 'package:ilmnur_mobile/features/home/presentation/pages/my_groups.dart';
 import 'package:ilmnur_mobile/features/home/presentation/widgets/add_group.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -195,58 +196,6 @@ class _CoursesScreenState extends State<CoursesScreen>
           ),
         ),
       ),
-    );
-  }
-}
-
-class MyCoursesView extends StatelessWidget {
-  MyCoursesView({Key? key}) : super(key: key);
-
-  void _showInputModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext modalContext) {
-        return BlocProvider.value(
-          value: BlocProvider.of<GroupBloc>(context),
-          child: AddGroupModal(),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        WButton(
-          text: "",
-          onTap: () => _showInputModal(context),
-          child: DottedBorder(
-            borderType: BorderType.RRect,
-            color: AppColors.mainColor,
-            strokeWidth: 1,
-            dashPattern: [5, 5],
-            strokeCap: StrokeCap.round,
-            radius: const Radius.circular(8),
-            child: Container(
-              height: 400,
-              width: 300,
-              decoration: BoxDecoration(),
-              clipBehavior: Clip.hardEdge,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset("assets/svg/icon/add.svg"),
-                  const Text(
-                    "Add new course",
-                    style: TextStyle(fontSize: 12, color: AppColors.mainColor),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

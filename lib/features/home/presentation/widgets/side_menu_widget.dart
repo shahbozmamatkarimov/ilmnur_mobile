@@ -45,7 +45,13 @@ class _SideMenuWidgetState extends State<SideMenuWidget> {
       ),
       child: InkWell(
         onTap: () => {
-          if (index == 0) {context.router.pushNamed("/")},
+          print(index),
+          if (index == 0)
+            {context.router.pushNamed("/")}
+          else if (index == 1)
+            {context.router.pushNamed("/reyting")}
+          else if (index == 3)
+            {context.router.pushNamed("/news")},
           setState(() {
             selectedIndex = index;
           }),

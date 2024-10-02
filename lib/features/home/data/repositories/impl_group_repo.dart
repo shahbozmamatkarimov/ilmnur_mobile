@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:ilmnur_mobile/core/error/exception_handler.dart';
+import 'package:ilmnur_mobile/features/home/data/models/group/GroupDto.dart';
 import 'package:ilmnur_mobile/features/home/data/models/group/creategroup.dart';
 import 'package:ilmnur_mobile/features/home/data/models/group/group.dart';
 import 'package:ilmnur_mobile/core/resources/data_state.dart';
@@ -47,7 +48,7 @@ class ImplGroupRepo extends GroupRepo {
   }
 
   @override
-  Future<DataState<List<Group>>> getGroup() async {
+  Future<DataState<GroupDto>> getGroup() async {
     try {
       final List<Group>? group = await _getGroupFromPreferences();
       if (group != null && group.isNotEmpty) {
@@ -56,16 +57,16 @@ class ImplGroupRepo extends GroupRepo {
       final response = await groupService.getGroups();
       print("Highlight");
       print(response.data);
-      await _saveGroupToPreferences(response.data);
-      return DataSuccess<List<Group>>(data: response.data);
+      // await _saveGroupToPreferences(response.data);
+      return DataSuccess<GroupDto>(data: response.data);
     } catch (e) {
       print(e);
-      return DataException.getError<List<Group>>(e);
+      return DataException.getError<GroupDto>(e);
     }
   }
 
   @override
-  Future<DataState<List<Group>>> createGroup(
+  Future<DataState<GroupDto>> createGroup(
       CreateGroupModel groupData) async {
     try {
       FormData formData = FormData.fromMap({
@@ -80,10 +81,10 @@ class ImplGroupRepo extends GroupRepo {
 
       print("Group Created: ${response.data}");
       // Optionally save the created group to preferences or handle it further
-      return DataSuccess<List<Group>>(data: res.data);
+      return DataSuccess<GroupDto>(data: res.data);
     } catch (e) {
       print("##$e");
-      return DataException.getError<List<Group>>(e);
+      return DataException.getError<GroupDto>(e);
     }
   }
 }

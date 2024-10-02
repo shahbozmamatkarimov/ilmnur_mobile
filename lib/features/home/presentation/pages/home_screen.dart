@@ -39,6 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
         const CoursesRoute(),
         CourseRoute(courseId: 1),
         LessonRoute(lessonId: 1),
+        const ReytingRoute(),
+        const NewsRoute(),
         // const CommunityTabRoute(),
         // SearchRoute(),
         // NotificationRoute(),
@@ -187,7 +189,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           label: bottonNavItems[index][1],
                           isActive: index == activeBottomNav,
                           onTap: () => {
-                            if (index == 0) {context.router.pushNamed("/")},
+                            if (index == 0) {context.router.pushNamed("/")}
+                            else if (index == 1) {context.router.pushNamed("/reyting")}
+                            else if (index == 3) {context.router.pushNamed("/news")},
                             // activeBottomNav = index
                             setState(() {
                               activeBottomNav = index;
