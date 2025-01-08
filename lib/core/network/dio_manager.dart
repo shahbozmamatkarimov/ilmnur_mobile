@@ -22,7 +22,7 @@ abstract class DioManager {
     dio.options.headers.addAll({
       "Accept": "application/json",
       "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI3MjUzOTU2LCJleHAiOjE3MjgxMTc5NTZ9.vPb8dXRj2jO-gzZEqrtt7hYCqf71agOvlZck6P-HL8o"
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzM2MDc2ODc2LCJleHAiOjE3MzY5NDA4NzZ9.xKc0_Mjvx6fNhRxXlnTr-42nGQyK6xQk0q55J_v2W0A"
     });
 
     return dio;

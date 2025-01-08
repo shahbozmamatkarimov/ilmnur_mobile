@@ -49,7 +49,6 @@ class ImplCategoryRepo extends CategoryRepo {
   Future<DataState<List<Category>>> getCategory() async {
     try {
       final List<Category>? category = await _getCategoryFromPreferences();
-      print(category);
       if (category != null && category.isNotEmpty) {
         // return DataSuccess<List<Category>>(data: category);
       }

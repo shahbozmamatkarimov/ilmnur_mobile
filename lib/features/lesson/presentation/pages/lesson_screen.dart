@@ -11,15 +11,13 @@ import 'package:ilmnur_mobile/core/widgets/w_tabbar.dart';
 import 'package:ilmnur_mobile/features/course/presentation/pages/chat.dart';
 import 'package:ilmnur_mobile/features/course/presentation/pages/news.dart';
 import 'package:ilmnur_mobile/features/course/presentation/pages/reyting.dart';
-import 'package:ilmnur_mobile/features/course/presentation/pages/settings.dart';
-import 'package:ilmnur_mobile/features/course/presentation/pages/users.dart';
-import 'package:ilmnur_mobile/features/home/presentation/pages/home_page.dart';
 import 'package:ilmnur_mobile/features/lesson/data/data_sources/lesson_service.dart';
 import 'package:ilmnur_mobile/features/lesson/data/models/lesson.dart';
 import 'package:ilmnur_mobile/features/lesson/data/repositories/impl_lesson_repo.dart';
 import 'package:ilmnur_mobile/features/lesson/presentation/bloc/group/lesson_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 @RoutePage()
 class LessonScreen extends StatefulWidget {
@@ -32,6 +30,7 @@ class LessonScreen extends StatefulWidget {
 class _LessonScreenState extends State<LessonScreen>
     with SingleTickerProviderStateMixin {
   late VideoPlayerController controller;
+  late YoutubePlayerController _controller;
   String currentVideoUrl = '';
 
   bool isLoading = true;
@@ -50,7 +49,6 @@ class _LessonScreenState extends State<LessonScreen>
     if (videoData.video == currentVideoUrl) return;
     currentVideoUrl = videoData.video;
     videoLesson = videoData;
-    print(videoLesson);
     controller = VideoPlayerController.network(videoData.video)
       ..addListener(() {
         if (controller.value.hasError) {
@@ -68,9 +66,30 @@ class _LessonScreenState extends State<LessonScreen>
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    // Replace with your YouTube video URL
+    String videoUrl = "https://www.youtube.com/watch?v=wd-99wY0b0w";
+
+    // Extract the video ID from the URL
+    String? videoId = YoutubePlayer.convertUrlToId(videoUrl);
+
+    // Initialize the YouTube player controller with the extracted video ID
+    _controller = YoutubePlayerController(
+      initialVideoId: videoId ?? "", // Use extracted ID or empty if null
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+      ),
+    );
+  }
+
+  @override
   void dispose() {
     if (controller.value.isInitialized) {
       controller.dispose();
+    _controller.dispose();
     }
     super.dispose();
   }
@@ -163,234 +182,245 @@ class _LessonScreenState extends State<LessonScreen>
                           ),
                           child: Column(
                             children: [
-                              Stack(
-                                children: [
-                                  controller.value.isInitialized
-                                      ? Container(
-                                          width: double.infinity, // Full width
-                                          height: isDesktop
-                                              ? 312
-                                              : 212, // Set height to 300
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            color: AppColors.black,
-                                          ),
-                                          clipBehavior: Clip.hardEdge,
-                                          child: AspectRatio(
-                                            aspectRatio:
-                                                controller.value.aspectRatio,
-                                            child: VideoPlayer(controller),
-                                          ),
-                                        )
-                                      : const Center(
-                                          child: CircularProgressIndicator()),
-                                  Positioned(
-                                    top: 16,
-                                    left: 16,
-                                    child: WButton(
-                                      text: "",
-                                      verticalPadding: 0,
-                                      horizontalPadding: 0,
-                                      color: AppColors.transparent,
-                                      onTap: () => {
-                                        Navigator.pop(context),
-                                      },
-                                      child: SvgPicture.asset(
-                                          "assets/svg/icon/backroute.svg"),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Column(
-                                      children: [
-                                        // Video progress slider
-                                        ValueListenableBuilder(
-                                          valueListenable: controller,
-                                          builder: (context,
-                                              VideoPlayerValue value, child) {
-                                            final duration = value
-                                                .duration.inSeconds
-                                                .toDouble();
-                                            final position = value
-                                                .position.inSeconds
-                                                .toDouble();
+                              YoutubePlayer(
+            controller: _controller,
+            showVideoProgressIndicator: true,
+            progressIndicatorColor: Colors.amber,
+            onReady: () {
+              print("Video is ready to play");
+            },
+            onEnded: (metaData) {
+              print("Video Ended: ${metaData.videoId}");
+            },
+          ),
+                              // Stack(
+                              //   children: [
+                              //     controller.value.isInitialized
+                              //         ? Container(
+                              //             width: double.infinity, // Full width
+                              //             height: isDesktop
+                              //                 ? 312
+                              //                 : 212, // Set height to 300
+                              //             decoration: BoxDecoration(
+                              //               borderRadius:
+                              //                   BorderRadius.circular(8),
+                              //               color: AppColors.black,
+                              //             ),
+                              //             clipBehavior: Clip.hardEdge,
+                              //             child: AspectRatio(
+                              //               aspectRatio:
+                              //                   controller.value.aspectRatio,
+                              //               child: VideoPlayer(controller),
+                              //             ),
+                              //           )
+                              //         : const Center(
+                              //             child: CircularProgressIndicator()),
+                              //     Positioned(
+                              //       top: 16,
+                              //       left: 16,
+                              //       child: WButton(
+                              //         text: "",
+                              //         verticalPadding: 0,
+                              //         horizontalPadding: 0,
+                              //         color: AppColors.transparent,
+                              //         onTap: () => {
+                              //           Navigator.pop(context),
+                              //         },
+                              //         child: SvgPicture.asset(
+                              //             "assets/svg/icon/backroute.svg"),
+                              //       ),
+                              //     ),
+                              //     Positioned(
+                              //       bottom: 0,
+                              //       left: 0,
+                              //       right: 0,
+                              //       child: Column(
+                              //         children: [
+                              //           // Video progress slider
+                              //           ValueListenableBuilder(
+                              //             valueListenable: controller,
+                              //             builder: (context,
+                              //                 VideoPlayerValue value, child) {
+                              //               final duration = value
+                              //                   .duration.inSeconds
+                              //                   .toDouble();
+                              //               final position = value
+                              //                   .position.inSeconds
+                              //                   .toDouble();
 
-                                            return SliderTheme(
-                                              data: SliderTheme.of(context)
-                                                  .copyWith(
-                                                trackShape:
-                                                    const RectangularSliderTrackShape(), // Makes the track go full width
-                                                trackHeight:
-                                                    2.0, // Set the height of the slider track (optional)
-                                                thumbShape:
-                                                    const RoundSliderThumbShape(
-                                                        enabledThumbRadius:
-                                                            6.0),
-                                                overlayShape:
-                                                    const RoundSliderOverlayShape(
-                                                        overlayRadius: 10.0),
-                                                // You can also modify other styling options as needed
-                                              ),
-                                              child: Slider(
-                                                min: 0.0,
-                                                max: duration,
-                                                value: position.clamp(
-                                                    0.0, duration),
-                                                activeColor:
-                                                    AppColors.mainColor,
-                                                inactiveColor:
-                                                    const Color(0x50FFFFFF),
-                                                onChanged: (newPosition) {
-                                                  controller.seekTo(Duration(
-                                                      seconds:
-                                                          newPosition.toInt()));
-                                                },
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        ValueListenableBuilder(
-                                          valueListenable: controller,
-                                          builder: (context,
-                                              VideoPlayerValue value, child) {
-                                            String formattedCurrent =
-                                                formatDuration(value.position);
-                                            String formattedTotal =
-                                                formatDuration(value.duration);
+                              //               return SliderTheme(
+                              //                 data: SliderTheme.of(context)
+                              //                     .copyWith(
+                              //                   trackShape:
+                              //                       const RectangularSliderTrackShape(), // Makes the track go full width
+                              //                   trackHeight:
+                              //                       2.0, // Set the height of the slider track (optional)
+                              //                   thumbShape:
+                              //                       const RoundSliderThumbShape(
+                              //                           enabledThumbRadius:
+                              //                               6.0),
+                              //                   overlayShape:
+                              //                       const RoundSliderOverlayShape(
+                              //                           overlayRadius: 10.0),
+                              //                   // You can also modify other styling options as needed
+                              //                 ),
+                              //                 child: Slider(
+                              //                   min: 0.0,
+                              //                   max: duration,
+                              //                   value: position.clamp(
+                              //                       0.0, duration),
+                              //                   activeColor:
+                              //                       AppColors.mainColor,
+                              //                   inactiveColor:
+                              //                       const Color(0x50FFFFFF),
+                              //                   onChanged: (newPosition) {
+                              //                     controller.seekTo(Duration(
+                              //                         seconds:
+                              //                             newPosition.toInt()));
+                              //                   },
+                              //                 ),
+                              //               );
+                              //             },
+                              //           ),
+                              //           ValueListenableBuilder(
+                              //             valueListenable: controller,
+                              //             builder: (context,
+                              //                 VideoPlayerValue value, child) {
+                              //               String formattedCurrent =
+                              //                   formatDuration(value.position);
+                              //               String formattedTotal =
+                              //                   formatDuration(value.duration);
 
-                                            // Playback control buttons
-                                            return Container(
-                                              // margin: const EdgeInsets.only(),
-                                              padding: const EdgeInsets.only(
-                                                left: 16,
-                                                right: 16,
-                                                top: 6,
-                                                bottom: 12,
-                                              ),
-                                              decoration: const BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    Color(0x901B1B1B),
-                                                    Color(0x001B1B1B),
-                                                  ],
-                                                  begin: Alignment.bottomCenter,
-                                                  end: Alignment.topCenter,
-                                                ),
-                                              ),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      WButton(
-                                                        text: "",
-                                                        color: AppColors
-                                                            .transparent,
-                                                        verticalPadding: 0,
-                                                        horizontalPadding: 0,
-                                                        onTap: () =>
-                                                            controller.play(),
-                                                        child: SvgPicture.asset(
-                                                            "assets/svg/video/play.svg"),
-                                                      ),
-                                                      const SizedBox(width: 20),
-                                                      WButton(
-                                                        text: "",
-                                                        color: AppColors
-                                                            .transparent,
-                                                        verticalPadding: 0,
-                                                        horizontalPadding: 0,
-                                                        onTap: () =>
-                                                            controller.pause(),
-                                                        child: SvgPicture.asset(
-                                                            "assets/svg/video/sound.svg"),
-                                                      ),
-                                                      const SizedBox(width: 8),
-                                                      Text(
-                                                        "$formattedCurrent / $formattedTotal",
-                                                        // "${minute.toString().padLeft(2, '0')}:${second.toString().padLeft(2, '0')} / $formatDuration(duration) / $duration / $position",
-                                                        style: const TextStyle(
-                                                          color:
-                                                              AppColors.white,
-                                                          fontSize: 14,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      WButton(
-                                                        text: "",
-                                                        color: AppColors
-                                                            .transparent,
-                                                        verticalPadding: 0,
-                                                        horizontalPadding: 0,
-                                                        onTap: () =>
-                                                            controller.seekTo(
-                                                          Duration(
-                                                              milliseconds: controller
-                                                                      .value
-                                                                      .position
-                                                                      .inMilliseconds -
-                                                                  10 * 1000),
-                                                        ),
-                                                        child: SvgPicture.asset(
-                                                            "assets/svg/video/backward.svg"),
-                                                      ),
-                                                      const SizedBox(width: 16),
-                                                      WButton(
-                                                        text: "",
-                                                        color: AppColors
-                                                            .transparent,
-                                                        verticalPadding: 0,
-                                                        horizontalPadding: 0,
-                                                        onTap: () => controller
-                                                            .seekTo(Duration(
-                                                                milliseconds: controller
-                                                                        .value
-                                                                        .position
-                                                                        .inMilliseconds +
-                                                                    10 * 1000)),
-                                                        child: SvgPicture.asset(
-                                                            "assets/svg/video/forward.svg"),
-                                                      ),
-                                                      const SizedBox(width: 16),
-                                                      // WButton(
-                                                      //   text: "",
-                                                      //   color: AppColors.transparent,
-                                                      //   verticalPadding: 0,
-                                                      //   horizontalPadding: 0,
-                                                      //   onTap: () => {},
-                                                      //   child: SvgPicture.asset(
-                                                      //       "assets/svg/video/settings.svg"),
-                                                      // ),
-                                                      // const SizedBox(width: 16),
-                                                      // WButton(
-                                                      //   text: "",
-                                                      //   color: AppColors.transparent,
-                                                      //   verticalPadding: 0,
-                                                      //   horizontalPadding: 0,
-                                                      //   onTap: () => {},
-                                                      //   child: SvgPicture.asset(
-                                                      //       "assets/svg/video/full_screen.svg"),
-                                                      // ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              //               // Playback control buttons
+                              //               return Container(
+                              //                 // margin: const EdgeInsets.only(),
+                              //                 padding: const EdgeInsets.only(
+                              //                   left: 16,
+                              //                   right: 16,
+                              //                   top: 6,
+                              //                   bottom: 12,
+                              //                 ),
+                              //                 decoration: const BoxDecoration(
+                              //                   gradient: LinearGradient(
+                              //                     colors: [
+                              //                       Color(0x901B1B1B),
+                              //                       Color(0x001B1B1B),
+                              //                     ],
+                              //                     begin: Alignment.bottomCenter,
+                              //                     end: Alignment.topCenter,
+                              //                   ),
+                              //                 ),
+                              //                 child: Row(
+                              //                   mainAxisAlignment:
+                              //                       MainAxisAlignment
+                              //                           .spaceBetween,
+                              //                   children: [
+                              //                     Row(
+                              //                       children: [
+                              //                         WButton(
+                              //                           text: "",
+                              //                           color: AppColors
+                              //                               .transparent,
+                              //                           verticalPadding: 0,
+                              //                           horizontalPadding: 0,
+                              //                           onTap: () =>
+                              //                               controller.play(),
+                              //                           child: SvgPicture.asset(
+                              //                               "assets/svg/video/play.svg"),
+                              //                         ),
+                              //                         const SizedBox(width: 20),
+                              //                         WButton(
+                              //                           text: "",
+                              //                           color: AppColors
+                              //                               .transparent,
+                              //                           verticalPadding: 0,
+                              //                           horizontalPadding: 0,
+                              //                           onTap: () =>
+                              //                               controller.pause(),
+                              //                           child: SvgPicture.asset(
+                              //                               "assets/svg/video/sound.svg"),
+                              //                         ),
+                              //                         const SizedBox(width: 8),
+                              //                         Text(
+                              //                           "$formattedCurrent / $formattedTotal",
+                              //                           // "${minute.toString().padLeft(2, '0')}:${second.toString().padLeft(2, '0')} / $formatDuration(duration) / $duration / $position",
+                              //                           style: const TextStyle(
+                              //                             color:
+                              //                                 AppColors.white,
+                              //                             fontSize: 14,
+                              //                           ),
+                              //                         ),
+                              //                       ],
+                              //                     ),
+                              //                     Row(
+                              //                       children: [
+                              //                         WButton(
+                              //                           text: "",
+                              //                           color: AppColors
+                              //                               .transparent,
+                              //                           verticalPadding: 0,
+                              //                           horizontalPadding: 0,
+                              //                           onTap: () =>
+                              //                               controller.seekTo(
+                              //                             Duration(
+                              //                                 milliseconds: controller
+                              //                                         .value
+                              //                                         .position
+                              //                                         .inMilliseconds -
+                              //                                     10 * 1000),
+                              //                           ),
+                              //                           child: SvgPicture.asset(
+                              //                               "assets/svg/video/backward.svg"),
+                              //                         ),
+                              //                         const SizedBox(width: 16),
+                              //                         WButton(
+                              //                           text: "",
+                              //                           color: AppColors
+                              //                               .transparent,
+                              //                           verticalPadding: 0,
+                              //                           horizontalPadding: 0,
+                              //                           onTap: () => controller
+                              //                               .seekTo(Duration(
+                              //                                   milliseconds: controller
+                              //                                           .value
+                              //                                           .position
+                              //                                           .inMilliseconds +
+                              //                                       10 * 1000)),
+                              //                           child: SvgPicture.asset(
+                              //                               "assets/svg/video/forward.svg"),
+                              //                         ),
+                              //                         const SizedBox(width: 16),
+                              //                         // WButton(
+                              //                         //   text: "",
+                              //                         //   color: AppColors.transparent,
+                              //                         //   verticalPadding: 0,
+                              //                         //   horizontalPadding: 0,
+                              //                         //   onTap: () => {},
+                              //                         //   child: SvgPicture.asset(
+                              //                         //       "assets/svg/video/settings.svg"),
+                              //                         // ),
+                              //                         // const SizedBox(width: 16),
+                              //                         // WButton(
+                              //                         //   text: "",
+                              //                         //   color: AppColors.transparent,
+                              //                         //   verticalPadding: 0,
+                              //                         //   horizontalPadding: 0,
+                              //                         //   onTap: () => {},
+                              //                         //   child: SvgPicture.asset(
+                              //                         //       "assets/svg/video/full_screen.svg"),
+                              //                         // ),
+                              //                       ],
+                              //                     ),
+                              //                   ],
+                              //                 ),
+                              //               );
+                              //             },
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                               const SizedBox(height: 24),
                               Row(
                                 mainAxisAlignment:

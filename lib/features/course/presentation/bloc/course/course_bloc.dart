@@ -22,11 +22,9 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
       emit(Loading());
       try {
         final response = await courseRepo.getCourses(id);
-        print("==$response");
         if (response is DataSuccess) {
           // course = response.data;
           List<Course>? course = response.data;
-          print(course);
           if (course != null) {
             emit(LoadedCourseData(
               course: course,
@@ -49,11 +47,9 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
         final res = await courseRepo.createCourse(event.course);
         final response = await courseRepo.getCourses(id);
 
-        print("==$response");
         if (response is DataSuccess) {
           // course = response.data;
           List<Course>? course = response.data;
-          print(course);
           if (course != null) {
             emit(LoadedCourseData(
               course: course,

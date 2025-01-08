@@ -22,7 +22,6 @@ class TestsBloc extends Bloc<TestsEvent, TestsState> {
       emit(Loading());
       try {
         final response = await testsRepo.getTests(id);
-        print("==$response");
         if (response is DataSuccess) {
           // tests = response.data;
           List<Tests>? tests = response.data;

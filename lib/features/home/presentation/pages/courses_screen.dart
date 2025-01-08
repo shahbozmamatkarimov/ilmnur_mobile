@@ -35,11 +35,9 @@ class _CoursesScreenState extends State<CoursesScreen>
       TabController(length: 7, vsync: this, initialIndex: 0);
 
   final List<String> categoryTabs = [
-    "Barchasi",
     "Guruhlar",
     "Kurslar",
     "Mentorlar",
-    "Mening guruhlarim"
   ];
 
   @override
@@ -123,7 +121,7 @@ class _CoursesScreenState extends State<CoursesScreen>
                                   ),
                                   for (dynamic i in category)
                                     WButton(
-                                      text: i.name,
+                                      text: i.category,
                                       fontSize: 12,
                                       borderRadius: 20,
                                       verticalPadding: 5,

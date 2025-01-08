@@ -85,12 +85,6 @@ class _AddCourseModalState extends State<AddCourseModal> {
               String title = _titleController.text;
               String description = _descriptionController.text;
               // Process the inputs (e.g., send to API or store locally)
-              print('Title: $title');
-              print('Description: $description');
-              print('Image Path: ${_image?.path}');
-
-              print(_image);
-              print(_image!.path);
               context.read<CourseBloc>().add(
                     CreateCourse(
                       course: CreateCourseModel(

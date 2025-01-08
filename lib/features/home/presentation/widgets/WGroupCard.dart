@@ -175,7 +175,7 @@ class _WGroupCardState extends State<WGroupCard> {
                         onTap: () => {},
                       ),
                       WButton(
-                        text: "226K learners",
+                        text: "${widget.group.users_count} learners",
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                         textColor: AppColors.c_07,

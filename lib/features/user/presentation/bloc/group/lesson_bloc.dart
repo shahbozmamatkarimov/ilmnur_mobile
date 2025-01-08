@@ -21,7 +21,6 @@ class LessonBloc extends Bloc<LessonEvent, LessonState> {
       emit(Loading());
       try {
         final response = await lessonRepo.getLesson(id);
-        print("==$response");
         if (response is DataSuccess) {
           // lesson = response.data;
           Lesson? lesson = response.data;

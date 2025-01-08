@@ -21,7 +21,6 @@ class ReytingBloc extends Bloc<ReytingEvent, ReytingState> {
       emit(Loading());
       try {
         final response = await lessonRepo.getReyting(id);
-        print("==$response");
         if (response is DataSuccess) {
           // lesson = response.data;
           Reyting? lesson = response.data;

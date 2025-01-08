@@ -14,7 +14,7 @@ class _LessonService implements LessonService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://localhost:4000/api/';
+    baseUrl ??= 'https://starfish-app-ueywh.ondigitalocean.app/api/';
   }
 
   final Dio _dio;

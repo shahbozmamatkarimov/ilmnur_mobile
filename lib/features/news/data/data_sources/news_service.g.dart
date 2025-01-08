@@ -14,7 +14,7 @@ class _ReytingService implements ReytingService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://localhost:4000/api/';
+    baseUrl ??= 'https://starfish-app-ueywh.ondigitalocean.app/api/';
   }
 
   final Dio _dio;

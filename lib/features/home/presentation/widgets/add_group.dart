@@ -83,17 +83,11 @@ class _AddGroupModalState extends State<AddGroupModal> {
               String title = _titleController.text;
               String description = _descriptionController.text;
               // Process the inputs (e.g., send to API or store locally)
-              print('Title: $title');
-              print('Description: $description');
-              print('Image Path: ${_image?.path}');
-
               // context.read<GroupBloc>().add(CreateGroup(group: CreateGroup(
               //   title: title,
               //   description: description,
               //   cover: _image!.path,
               // )));
-              print(_image);
-              print(_image!.path);
               context.read<GroupBloc>().add(
                     CreateGroup(
                       group: CreateGroupModel(

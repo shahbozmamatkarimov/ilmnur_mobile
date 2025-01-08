@@ -7,13 +7,13 @@ part 'category.g.dart'; // Ensure this matches your filename
 @JsonSerializable()
 class Category {
   final int id;
-  final String name;
+  final String category;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   Category({
     required this.id,
-    required this.name,
+    required this.category,
     required this.createdAt,
     required this.updatedAt,
   });

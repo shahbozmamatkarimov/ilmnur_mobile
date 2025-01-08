@@ -49,7 +49,6 @@ class _UserScreenState extends State<UserScreen>
     if (videoData.video == currentVideoUrl) return;
     currentVideoUrl = videoData.video;
     videoLesson = videoData;
-    print(videoLesson);
     controller = VideoPlayerController.network(videoData.video)
       ..addListener(() {
         if (controller.value.hasError) {

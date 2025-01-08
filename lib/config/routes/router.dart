@@ -5,14 +5,18 @@ import 'package:ilmnur_mobile/config/routes/router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
-        // settings routes
         AutoRoute(
-          page: HomeRoute.page,
+          page: OnBoardingRoute.page,
           path: '/',
+        ),
+        AutoRoute(
+          path: '/home',
+          page: HomeRoute.page,
+          // initial: true,
           children: [
             AutoRoute(
               page: CoursesRoute.page,
-              path: '',
+              path: 'course',
               // initial: true,
             ),
             AutoRoute(
@@ -41,6 +45,7 @@ class AppRouter extends $AppRouter {
           page: TestsRoute.page,
           path: '/test/:testId',
         ),
+        // settings
         // AutoRoute(
         //   page: InviteRoute.page,
         //   path: '/invite',

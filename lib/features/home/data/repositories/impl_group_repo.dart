@@ -55,9 +55,6 @@ class ImplGroupRepo extends GroupRepo {
         // return DataSuccess<List<Group>>(data: group);
       }
       final response = await groupService.getGroups();
-      print("Highlight");
-      print(response.data);
-      // await _saveGroupToPreferences(response.data);
       return DataSuccess<GroupDto>(data: response.data);
     } catch (e) {
       print(e);
@@ -79,7 +76,6 @@ class ImplGroupRepo extends GroupRepo {
           await groupService.createGroup(formData); // Pass the group data
       final res = await groupService.getGroups();
 
-      print("Group Created: ${response.data}");
       // Optionally save the created group to preferences or handle it further
       return DataSuccess<GroupDto>(data: res.data);
     } catch (e) {

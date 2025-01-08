@@ -48,7 +48,6 @@ class ImplUserRepo extends UserRepo {
   Future<DataState<User>> getUser(int id) async {
     try {
       final List<User>? users = await _getUsersFromPreferences();
-      print(users);
       if (users != null && users.isNotEmpty) {
         // return DataSuccess<List<User>>(data: users);
       }

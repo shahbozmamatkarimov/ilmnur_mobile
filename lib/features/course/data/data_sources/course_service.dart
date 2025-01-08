@@ -17,7 +17,7 @@ abstract class CourseService {
     return CourseService(dio);
   }
 
-  @GET("course/getByCourse/{id}")
+  @GET("course/getByCourse/{id}/0")
   Future<HttpResponse<List<Course>>> getCourses(@Path("id") int id);
 
   @POST("course/create")

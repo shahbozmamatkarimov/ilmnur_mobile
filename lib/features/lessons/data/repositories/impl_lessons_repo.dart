@@ -53,7 +53,6 @@ class ImplLessonsRepo extends LessonsRepo {
       //   // return DataSuccess<List<Lessons>>(data: lessons);
       // }
       final response = await lessonsService.getLessonss(id);
-      print(response);
       await _saveLessonssToPreferences(response.data.lessons);
       return DataSuccess<CourseDto>(data: response.data);
     } catch (e) {

@@ -56,7 +56,6 @@ class ImplCourseRepo extends CourseRepo {
       // return DataSuccess<List<Course>>(data: courses);
       // }
       final response = await courseService.getCourses(id);
-      print(response);
       // await _saveCoursesToPreferences(response.data);
       return DataSuccess<List<Course>>(data: response.data);
     } catch (e) {
@@ -81,7 +80,6 @@ class ImplCourseRepo extends CourseRepo {
       final response =
           await courseService.createCourse(formData); // Pass the group data
 
-      print("Group Created: ${response.data}");
       return DataSuccess<CreateCourseModel>(data: response.data);
     } catch (e) {
       print("##$e");

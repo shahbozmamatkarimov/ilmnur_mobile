@@ -48,7 +48,6 @@ class ImplReytingRepo extends ReytingRepo {
   Future<DataState<Reyting>> getReyting(int id) async {
     try {
       final List<Reyting>? reytings = await _getReytingsFromPreferences();
-      print(reytings);
       if (reytings != null && reytings.isNotEmpty) {
         // return DataSuccess<List<Reyting>>(data: reytings);
       }

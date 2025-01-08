@@ -19,7 +19,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       emit(Loading());
       try {
         final response = await categoryRepo.getCategory();
-        print("==$response");
         if (response is DataSuccess) {
           // category = response.data;
           List<Category>? category = response.data;

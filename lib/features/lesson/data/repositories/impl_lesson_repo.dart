@@ -48,7 +48,6 @@ class ImplLessonRepo extends LessonRepo {
   Future<DataState<Lesson>> getLesson(int id) async {
     try {
       final List<Lesson>? lessons = await _getLessonsFromPreferences();
-      print(lessons);
       if (lessons != null && lessons.isNotEmpty) {
         // return DataSuccess<List<Lesson>>(data: lessons);
       }

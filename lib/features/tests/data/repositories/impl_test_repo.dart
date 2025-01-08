@@ -51,7 +51,6 @@ class ImplTestsRepo extends TestsRepo {
       //   // return DataSuccess<List<Tests>>(data: tests);
       // }
       final response = await testsService.getTests(id);
-      // print(response);
       // await _saveTestssToPreferences(response.data.tests);
       return DataSuccess<List<Tests>>(data: response.data);
     } catch (e) {

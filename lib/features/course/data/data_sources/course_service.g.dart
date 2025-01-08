@@ -14,7 +14,7 @@ class _CourseService implements CourseService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'http://localhost:4000/api/';
+    baseUrl ??= 'https://starfish-app-ueywh.ondigitalocean.app/api/';
   }
 
   final Dio _dio;
@@ -36,7 +36,7 @@ class _CourseService implements CourseService {
     )
         .compose(
           _dio.options,
-          'course/getByCourse/${id}',
+          'course/getByCourse/${id}/0',
           queryParameters: queryParameters,
           data: _data,
         )

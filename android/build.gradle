@@ -1,16 +1,19 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Use a more recent AGP version for better compatibility with Java 17
+        classpath 'com.android.tools.build:gradle:7.3.0'  // or newer
+    }
+}
+
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
-}
-
-rootProject.buildDir = "../build"
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(":app")
 }
 
 tasks.register("clean", Delete) {
