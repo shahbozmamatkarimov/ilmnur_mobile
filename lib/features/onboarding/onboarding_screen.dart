@@ -38,11 +38,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     return AutoTabsRouter(
       routes: [
-        HomeRoute(),
+        // HomeRoute(),
         ],
       transitionBuilder: (context, child, animation) => FadeTransition(
         opacity: animation,
-        child: child,
+        child: child, 
       ),
       builder: (context, child) {
         return Scaffold(
