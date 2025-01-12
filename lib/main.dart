@@ -11,7 +11,7 @@ void main() async {
     if (Platform.isWindows || Platform.isMacOS) {
       await windowManager.ensureInitialized();
 
-      // Set window properties
+      // Set window properties 
       await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
     }
   }
