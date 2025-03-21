@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:io';
-import 'package:ilmnur_mobile/config/routes/router.dart';
-import 'package:ilmnur_mobile/core/resources/app_colors.dart';
+import 'package:testapp/config/routes/router.dart';
+import 'package:testapp/core/resources/app_colors.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {

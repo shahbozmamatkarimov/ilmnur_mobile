@@ -9,25 +9,25 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i11;
-import 'package:ilmnur_mobile/features/course/presentation/pages/main_screen.dart'
+import 'package:testapp/features/course/presentation/pages/main_screen.dart'
     as _i5;
-import 'package:ilmnur_mobile/features/home/presentation/pages/courses_screen.dart'
+import 'package:testapp/features/home/presentation/pages/courses_screen.dart'
     as _i2;
-import 'package:ilmnur_mobile/features/home/presentation/pages/home_screen.dart'
+import 'package:testapp/features/home/presentation/pages/home_screen.dart'
     as _i3;
-import 'package:ilmnur_mobile/features/lesson/presentation/pages/lesson_screen.dart'
+import 'package:testapp/features/lesson/presentation/pages/lesson_screen.dart'
     as _i4;
-import 'package:ilmnur_mobile/features/lessons/presentation/pages/lessons_screen.dart'
+import 'package:testapp/features/lessons/presentation/pages/lessons_screen.dart'
     as _i1;
-import 'package:ilmnur_mobile/features/news/presentation/pages/news_screen.dart'
+import 'package:testapp/features/news/presentation/pages/news_screen.dart'
     as _i6;
-import 'package:ilmnur_mobile/features/onboarding/onboarding_screen.dart'
+import 'package:testapp/features/onboarding/onboarding_screen.dart'
     as _i7;
-import 'package:ilmnur_mobile/features/reyting/presentation/pages/reyting_screen.dart'
+import 'package:testapp/features/reyting/presentation/pages/reyting_screen.dart'
     as _i8;
-import 'package:ilmnur_mobile/features/tests/presentation/pages/test_screen.dart'
+import 'package:testapp/features/tests/presentation/pages/test_screen.dart'
     as _i9;
-import 'package:ilmnur_mobile/features/user/presentation/pages/user_screen.dart'
+import 'package:testapp/features/user/presentation/pages/user_screen.dart'
     as _i10;
 
 abstract class $AppRouter extends _i11.RootStackRouter {
