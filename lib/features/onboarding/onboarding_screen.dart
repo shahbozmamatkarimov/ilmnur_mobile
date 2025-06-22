@@ -36,52 +36,26 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    return AutoTabsRouter(
-      routes: [
-        // HomeRoute(),
-        ],
-      transitionBuilder: (context, child, animation) => FadeTransition(
-        opacity: animation,
-        child: child, 
-      ),
-      builder: (context, child) {
-        return Scaffold(
-          // backgroundColor: AppColors.backgroundColor,
-          body: ConcentricPageView(
-            colors: pages.map((p) => p.bgColor).toList(),
-            radius: screenWidth * 0.1,
-            nextButtonBuilder: (context) => Padding(
-              padding: const EdgeInsets.only(left: 3), // visual center
-              child: Icon(
-                Icons.navigate_next,
-                size: screenWidth * 0.08,
-              ),
-            ),
-            itemCount: pages.length,
-            // enable itemcount to disable infinite scroll
-            // opacityFactor: 2.0,
-            // scaleFactor: 2,
-            // verticalPosition: 0.7,
-            // direction: Axis.vertical,
-            // itemCount: pages.length,
-            // physics: NeverScrollableScrollPhysics(),
-            onFinish: () {
-              // Navigate to the next screen
-              // context.router.pushNamed("/home");
-              context.router.replaceNamed('/home');
-              // context.router.push(const HomeScreenRoute());
-
-// context.router.replace(const HomeRoute());
-            },
-            itemBuilder: (index) {
-              final page = pages[index % pages.length];
-              return SafeArea(
-                child: _Page(page: page),
-              );
-            },
+    return Scaffold(
+      body: ConcentricPageView(
+        colors: pages.map((p) => p.bgColor).toList(),
+        radius: screenWidth * 0.1,
+        nextButtonBuilder: (context) => Padding(
+          padding: const EdgeInsets.only(left: 3),
+          child: Icon(
+            Icons.navigate_next,
+            size: screenWidth * 0.08,
           ),
-        );
-      },
+        ),
+        itemCount: pages.length,
+        onFinish: () {
+          context.router.replaceNamed('/home');
+        },
+        itemBuilder: (index) {
+          final page = pages[index % pages.length];
+          return SafeArea(child: _Page(page: page));
+        },
+      ),
     );
   }
 }

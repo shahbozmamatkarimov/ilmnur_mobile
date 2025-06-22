@@ -14,7 +14,7 @@ class _CourseService implements CourseService {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://starfish-app-ueywh.ondigitalocean.app/api/';
+    baseUrl ??= 'https://vercel-backend-bay.vercel.app/api/';
   }
 
   final Dio _dio;

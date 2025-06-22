@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:ilmnur_mobile/config/routes/router.gr.dart';
 import 'package:ilmnur_mobile/core/resources/app_colors.dart';
-import 'package:ilmnur_mobile/core/widgets/w_button.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:ilmnur_mobile/features/home/data/data_sources/group/group_service.dart';
 import 'package:ilmnur_mobile/features/home/data/repositories/impl_group_repo.dart';
 import 'package:ilmnur_mobile/features/home/presentation/bloc/group/group_bloc.dart';

@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:testapp/config/routes/router.gr.dart';
+import 'package:ilmnur_mobile/config/routes/router.gr.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen,Route')
 class AppRouter extends $AppRouter {
@@ -8,6 +8,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: OnBoardingRoute.page,
           path: '/',
+          initial: true,
         ),
         AutoRoute(
           path: '/home',

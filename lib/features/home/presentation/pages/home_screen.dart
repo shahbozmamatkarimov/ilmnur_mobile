@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           label: bottonNavItems[index][1],
                           isActive: index == activeBottomNav,
                           onTap: () => {
-                            if (index == 0) {context.router.pushNamed("/")}
+                            if (index == 0) {context.router.pushNamed("/home")}
                             else if (index == 1) {context.router.pushNamed("/reyting")}
                             else if (index == 3) {context.router.pushNamed("/news")},
                             // activeBottomNav = index
